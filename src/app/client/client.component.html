@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row">
+        <div class="card"  *ngIf="mode==0">
+            <div class="card-header"></div>
+            <div class="card-body">
+            <form #f="ngForm" (ngSubmit)="onSaveClient(f.value)">
+                <div class="form-group">
+                    <div class="form-label">Name</div>
+                    <input type="text" name="name" ngModel id="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="form-label">Adress</div>
+                    <input type="text" name="adresse" id="" ngModel class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="form-label">Phone Number </div>
+                    <input type="text" name="phoneNumber" id="" ngModel class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="form-label">Email</div>
+                    <input type="email" name="email" id="" ngModel class="form-control">
+                </div>
+                <button type="submit"  class=" btn btn-success">Next</button>
+            </form>
+    
+            </div>
+        </div>
+    <!-- csdvdffcxbcbccccccccccccccccccccca-->
+    <div class="card"  *ngIf="mode==1">
+        <div class="card-header">Recap de votre Commande</div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6" >
+                   <p > <b>Nom du client</b> : {{this.orderService.order.client.name}} </p>
+                   <p ><b>Adresse</b> : {{this.orderService.order.client.adresse}}  </p>
+                   <p ><b> Tel </b>: {{this.orderService.order.client.phoneNumber}}  </p>
+                   <p ><b> Email </b>: {{this.orderService.order.client.email}}  </p>
+                    </div>
+                    <div class="col-sm-6" >
+                        <p><b>Order Id</b > :{{this.orderService.order.id}}</p> 
+                        <p><b>Order Date </b>: {{this.orderService.order.date}}  </p>
+                    </div><br/>
+                    <div class="col">
+                        <table class="table table-striped">
+                            <thead>
+                         <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                         </tr>
+                            </thead>
+                            <tbody *ngIf="this.caddyService.getCurrentCaddy()" >
+                               <tr *ngFor="let pi of  this.orderService.order.products">
+                                <td>{{pi.id}}</td>
+                                
+                                <td>{{pi.product.name}}</td>
+                                <td>{{pi.quantity}}</td>
+                                <td>{{pi.price}}</td>
+                                
+                               </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">total</td>
+                                    <td>{{caddyService.getTotal()}}</td>
+                                </tr>
+                                <tr> 
+                                    <td>
+              <button *ngIf="!this.orderService.order.id" class="btn btn-primary" (click)="onOrder()">
+                Confirmer la Commande </button>
+                                    </td>
+                                    <td>
+                                        <button *ngIf="this.orderService.order.id" 
+                                         class="btn btn-primary" (click)="onPayOrder(this.orderService.order.id)">Pay Order </button>
+                                        </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                     
+                    </div>
+                    </div>
+                    </div>  
+         
+        </div>
+    </div>
+    
+    </div>
+    </div>
+    
+    
+    
+    
+    

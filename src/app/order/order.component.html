@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="card" *ngIf="mode==0 " >
+        <div class="card-header">
+    My orders
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+             <tr>
+                <th>Id</th>
+                <th>date</th>
+                <th>Total Amount</th>
+                
+                
+             </tr >
+                </thead>
+                <tbody  >
+                   <tr *ngFor="let o of order._embedded?.order1s">
+                    <td>{{o.id}}</td>
+                    
+                    <td>{{o.date}}</td>
+                    <td>{{o.totalAmount}}</td>
+                    <td *ngIf="o.paid==true">paid</td>
+                    <td *ngIf="o.paid==false" >
+                    <button class="btn btn-primary" (click)="onPayOrder(o.id)">Pay Order</button>
+                    </td>
+                    <td><button class="btn btn-secondary" (click)="viewDetails(o.id)" >details</button></td>
+                   </tr>
+                </tbody>
+               
+            </table>
+        </div>
+    </div>
+    
+    <div class="card" *ngIf="mode==1 " >
+        <div class="container">
+                <div class="card-header">
+            Caddies
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                     <tr>
+                
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        
+                     </tr>
+                        </thead>
+                        <tbody *ngIf="this.orderDetails" >
+                           <tr *ngFor="let pi of  orderDetails._embedded.orderItems">
+                        
+                            <td>{{pi.name}}</td>
+                            <td>{{pi.quantity}}</td>
+                             <td>{{pi.price}}</td>
+                          
+                            
+                           </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                        
+                          </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>

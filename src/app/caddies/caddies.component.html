@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+    Caddies
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+             <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                
+             </tr>
+                </thead>
+                <tbody *ngIf="this.caddyService.getCurrentCaddy()" >
+                   <tr *ngFor="let pi of  productItem">
+                    <td>{{pi.id}}</td>
+                    
+                    <td>{{pi.product.name}}</td>
+                    <td>{{pi.quantity}}</td>
+                    <td>{{pi.price}}</td>
+                    <td >
+                        <button class="btn btn-danger" (click)="deleteItemOnCaddies(pi)"  ><i class="bi bi-trash"></i></button>
+                    </td>
+                    
+                   </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">total</td>
+                        <td>{{caddyService.getTotal()}}</td>
+                    </tr>
+                    <tr> 
+                        <td>
+                        <button (click)="onNewOder()" class="btn btn-primary">Commander</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    
+    </div>

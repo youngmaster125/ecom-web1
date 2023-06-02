@@ -1,0 +1,112 @@
+        <!----Formulaire -->
+        <div class="">
+            <div class="container"  >
+              
+                <div class="row">
+                        <div class="card heigted">
+                            <div class="card-header">Save Product </div>
+                  
+                            <div class="card-body">
+                              <form [formGroup]="productFormGroup" (ngSubmit)="addProduct()">
+                                <div>
+                                    Category
+                                <select class="form-select"  formControlName="category"  aria-label="Default select example"
+                                [ngClass]="{ 'is-invalid': productFormGroup.controls['category'].errors 
+                                && ( productFormGroup.controls['category'].dirty || productFormGroup.controls['category'].touched) }"
+                               
+                                [ngClass]="{ 'is-valid': productFormGroup.controls['category'].valid
+                                && ( productFormGroup.controls['category'].dirty || productFormGroup.controls['category'].touched) }"
+                                >
+                                <small *ngIf="productFormGroup.controls['category'].errors 
+            && productFormGroup.controls['category'].touched" class="text-danger">
+         {{getErroMessage('category',productFormGroup.controls['category'].errors)}}
+        </small>
+                                   
+                                    <option value="{{c.id}}"
+                                    *ngFor="let c of categories._embedded?.categories"
+                                    >{{c.name}}</option>
+                                
+                                  </select>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="" class="control-label">Name</label>
+                  <input type="text"  formControlName="name"  class="form-control"  
+                  [ngClass]="{ 'is-invalid': productFormGroup.controls['name'].errors 
+                  && ( productFormGroup.controls['name'].dirty || productFormGroup.controls['name'].touched) }"
+                 
+                  [ngClass]="{ 'is-valid': productFormGroup.controls['name'].valid
+                  && ( productFormGroup.controls['name'].dirty || productFormGroup.controls['name'].touched) }"
+                  >
+                  <small *ngIf="productFormGroup.controls['name'].errors 
+            && productFormGroup.controls['name'].touched" class="text-danger">
+        {{getErroMessage('name',productFormGroup.controls['name'].errors)}}
+        </small>
+                                </div>
+                       <div class="form-group">
+                         <label for="" class="control-label">Description </label>
+                         <input type="text"  formControlName="description"  class="form-control" 
+                         [ngClass]="{ 'is-invalid': productFormGroup.controls['description'].errors 
+              && ( productFormGroup.controls['description'].dirty || productFormGroup.controls['description'].touched) }"
+              
+              [ngClass]="{ 'is-valid': productFormGroup.controls['description'].valid
+              && ( productFormGroup.controls['description'].dirty || productFormGroup.controls['description'].touched) }"
+              
+                        
+                         >
+                         <small *ngIf="productFormGroup.controls['description'].errors 
+                         && productFormGroup.controls['description'].touched" class="text-danger">
+                     {{getErroMessage('description',productFormGroup.controls['description'].errors)}}
+                     </small>      
+                        
+                        </div>
+                              <div class="form-group">
+                                <label for="" class="control-label">Price</label>
+                                 <input type="number" required=""  formControlName="currentprice" class="form-control"
+                                 [ngClass]="{ 'is-invalid': productFormGroup.controls['currentprice'].errors 
+                                 && ( productFormGroup.controls['currentprice'].dirty || productFormGroup.controls['currentprice'].touched) }"
+                                 
+                                 [ngClass]="{ 'is-valid': productFormGroup.controls['currentprice'].valid
+                                 && ( productFormGroup.controls['currentprice'].dirty || productFormGroup.controls['currentprice'].touched) }"
+                                 
+                                 >
+                                 <small *ngIf="productFormGroup.controls['currentprice'].errors 
+                                 && productFormGroup.controls['currentprice'].touched" class="text-danger">
+                             {{getErroMessage('current price',productFormGroup.controls['currentprice'].errors)}}
+                             </small>
+                           
+                                </div>
+                            <div class="form-group">
+                              <label for="" class="control-label">promotion</label>
+                               <input type="checkbox" formControlName="promotion"  >
+                          </div>
+                          <div class="form-group">
+                            <label for="" class="control-label">Selection </label>
+                             <input type="checkbox"  formControlName="selected"  >
+                        </div>
+                        <div class="form-group">
+                          <label for="" class="control-label">Available </label>
+                           <input type="checkbox"  formControlName="available" >
+                      </div>
+                               
+                      <button type="submit" [disabled]="!productFormGroup.valid" class="btn btn-primary">Save </button>
+                                </form>
+                                
+                            
+           
+           </div>
+           </div>
+           </div>
+           </div>
+  
+
+           <!--
+
+              <select class="form-select" required="" formControlName="category"  aria-label="Default select example"
+                  [ngClass]="{ 'is-invalid': productFormGroup.controls['category'].errors 
+                   && ( productFormGroup.controls['category'].dirty || productFormGroup.controls['category'].touched) }"
+                 [ngClass]="{ 'is-valid': productFormGroup.controls['category'].valid &&
+                  ( productFormGroup.controls['category'].dirty||  productFormGroup.controls['category'].touched) }"
+                                >
+
+           -->

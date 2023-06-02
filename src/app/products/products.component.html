@@ -1,0 +1,83 @@
+
+<div class="" *ngIf="products">
+    <div>
+        <h3 class="center">{{tilte}}</h3>
+    </div>
+    <div class="container">
+      <button class="btn btn-outline-success" (click)="addProducts()"
+       *ngIf="authService.isAdmin()"> add Products</button>
+       <button class="btn btn-outline-success" (click)="addCategories()"
+       *ngIf="authService.isAdmin()"> add Categories</button>
+       <hr *ngIf="authService.isAdmin()">
+        <div class="row row-cols-3">
+            <div class="col" *ngFor="let p of products._embedded.products">
+                <div class="card heigted  m-2" style="width: 18rem;">
+                    <div class="card-header ">
+                      {{p.name}}
+                    </div>
+                
+                    <div class="card-body">
+         <img width="140" class="img-thumbnail img-rounded btn " (click)="onProductsDetails(p)"   height="100" src="{{this.productService.host+'/photoProduct/'+p.id+'?ts='+getTS()}}" />
+         <div *ngIf="authService.isAdmin()">
+            <button (click)="onEditPhoto(p)"  > 
+                <span class="upload-btn"></span>
+            </button>
+                  
+            <p *ngIf="editPhoto && currentProduct==p" >
+                <input type='file' (change)="onSelectedFile($event)">
+                                 <button class="btn btn-success" (click)="upload()">Upload</button>
+                                 {{progress }}
+            </p>
+                               
+           </div>  
+           <div>{{p.description}}</div>
+          
+           <div><b>Price: </b>{{p.currentprice|number:'0.2'}} </div>
+        
+         <div style="width: 100%; ">
+            <span *ngIf="p.promotion">
+                <i class="bi bi-star fa-5x  " style="color: rgba(255, 0, 0, 0.733); font-size: 20px;"></i>
+            </span>
+            <span *ngIf="p.selected">
+                <i class="bi bi-balloon-heart  " style="color: rgb(240, 48, 58); font-size: 20px;" ></i>
+            </span>
+            
+            <span *ngIf="p.available">
+              <!----
+                <img src="/assets/images/availl.png"  
+                class="rounded-circle float-start"
+                 height="100" width="100%"
+               !-->
+                 
+           <i class="bi bi-check2-circle  " style="color: rgb(14, 207, 56); font-size: 20px;"></i>
+                
+            </span>
+            
+         </div>
+
+         <div style="width:100% ;">
+            <form #f="ngForm" (ngSubmit)="onAddProductTocaddy(p)">
+              <label for="" class="control-label" >Quantity</label>
+              <input type="number" name="quantity" [(ngModel)]="p.quantity" ngModel
+              style="width: 40px; ;">
+              <button type="submit">
+                <i class="bi bi-cart-check "></i>
+              </button>
+            </form>
+         </div>
+         </div>
+         </div>
+         </div>
+         </div>
+         </div>
+         </div>
+         
+         
+         
+         
+         
+         
+         
+         
+         
+       

@@ -1,0 +1,161 @@
+
+<div class="" *ngIf="currentProduct">
+    <div class="container" *ngIf="mode==0">
+        <div class="row">
+            <div class="col-sm-8" >
+                <div class="card heigted">
+                    <div class="card-header" >
+                     Fiche Product {{currentProduct.name }}
+                      <span class="float-end" (click)="onEditProduct(currentProduct)"
+                      
+                      ><i class="bi bi-cart-check" *ngIf="authService.isAdmin()" ></i> </span>
+                    </div>
+                    <div class="card-body">
+         <img width="200" class="img-thumbnail img-rounded btn "    height="200" src="{{this.productService.host+'/photoProduct/'+currentProduct.id+'?ts='+getTS()}}" />
+         <div *ngIf="authService.isAdmin()">
+            <button (click)="onEditPhoto(currentProduct)"  > 
+                <span class="upload-btn"></span>
+            </button>
+                  
+            <p *ngIf="editPhoto && currentProduct==this.currentProduct" >
+                <input type='file' (change)="onSelectedFile($event)">
+                                 <button class="btn btn-success" (click)="upload()">Upload</button>
+                                 {{progress }}
+            </p>
+                               
+           </div>  
+          
+        
+         <div style="width: 100%;">
+            <span *ngIf="currentProduct.promotion">
+                <i class="bi bi-star fa-5x  " style="color: rgba(255, 0, 0, 0.733); font-size: 20px;"></i>
+            </span>
+            <span *ngIf="currentProduct.selected">
+                <i class="bi bi-balloon-heart  " style="color: rgb(240, 48, 58); font-size: 20px;" ></i>
+            </span>
+            
+            <span *ngIf="currentProduct.available">
+              <!----
+                <img src="/assets/images/availl.png"  
+                class="rounded-circle float-start"
+                 height="100" width="100%"
+                 >
+                 !--->
+           <i class="bi bi-check2-circle  " style="color: rgb(14, 207, 56); font-size: 20px;"></i>
+                
+            </span>
+            
+         </div>
+
+         <div style="width:100% ;">
+            <form #f="ngForm" (onsubmit)="onAddProductTocaddy()">
+              <label for="" class="control-label" >Quantity</label>
+              <input type="number" name="quantity" [(ngModel)]="currentProduct.quantity"
+              style="width: 40px; ;">
+              <button>
+                <i class="bi bi-cart-check "></i>
+                <img src=" ">
+              </button>
+            </form>
+         </div>
+         </div>
+         </div>
+         </div>
+         <div class="col-sm-4">
+            <div class="card heigted" style="width: 18rem;">
+                <div class="card-header"></div>
+            <div><b>Price : </b>{{currentProduct.currentprice|number:'0.2'}} </div>
+            <div>Description : {{currentProduct.description}}</div>
+
+            {{currentProduct.description}}
+            </div>
+         </div>
+         </div>
+         </div>
+         </div>
+
+        <!----Formulaire -->
+         <div class="">
+          <div class="container" *ngIf="mode==1" >
+              <div class="row">
+                      <div class="card heigted">
+                          <div class="card-header">Update Product </div>
+                          <div class="card-body">
+                            <form [formGroup]="productFormGroup" (ngSubmit)="onUpdate()">
+
+
+                                <div class="form-group">
+                                  <label for="" class="control-label">Name</label>
+                <input type="text"  formControlName="name"  class="form-control"  
+                [ngClass]="{ 'is-invalid': productFormGroup.controls['name'].errors 
+                && ( productFormGroup.controls['name'].dirty || productFormGroup.controls['name'].touched) }"
+               
+                [ngClass]="{ 'is-valid': productFormGroup.controls['name'].valid
+                && ( productFormGroup.controls['name'].dirty || productFormGroup.controls['name'].touched) }"
+                >
+                <small *ngIf="productFormGroup.controls['name'].errors 
+          && productFormGroup.controls['name'].touched" class="text-danger">
+      {{getErroMessage('name',productFormGroup.controls['name'].errors)}}
+      </small>
+                              </div>
+                     <div class="form-group">
+                       <label for="" class="control-label">Description </label>
+                       <input type="text"  formControlName="description"  class="form-control" 
+                       [ngClass]="{ 'is-invalid': productFormGroup.controls['description'].errors 
+            && ( productFormGroup.controls['description'].dirty || productFormGroup.controls['description'].touched) }"
+            
+            [ngClass]="{ 'is-valid': productFormGroup.controls['description'].valid
+            && ( productFormGroup.controls['description'].dirty || productFormGroup.controls['description'].touched) }"
+            
+                      
+                       >
+                       <small *ngIf="productFormGroup.controls['description'].errors 
+                       && productFormGroup.controls['description'].touched" class="text-danger">
+                   {{getErroMessage('description',productFormGroup.controls['description'].errors)}}
+                   </small>      
+                      
+                      </div>
+                            <div class="form-group">
+                              <label for="" class="control-label">Price</label>
+                               <input type="number" required=""  formControlName="currentprice" class="form-control"
+                               [ngClass]="{ 'is-invalid': productFormGroup.controls['currentprice'].errors 
+                               && ( productFormGroup.controls['currentprice'].dirty || productFormGroup.controls['currentprice'].touched) }"
+                               
+                               [ngClass]="{ 'is-valid': productFormGroup.controls['currentprice'].valid
+                               && ( productFormGroup.controls['currentprice'].dirty || productFormGroup.controls['currentprice'].touched) }"
+                               
+                               >
+                               <small *ngIf="productFormGroup.controls['currentprice'].errors 
+                               && productFormGroup.controls['currentprice'].touched" class="text-danger">
+                           {{getErroMessage('current price',productFormGroup.controls['currentprice'].errors)}}
+                           </small>
+                         
+                              </div>
+                          <div class="form-group">
+                            <label for="" class="control-label">promotion</label>
+                             <input type="checkbox" formControlName="promotion"  >
+                        </div>
+                        <div class="form-group">
+                          <label for="" class="control-label">Selection </label>
+                           <input type="checkbox"  formControlName="selected"  >
+                      </div>
+                      <div class="form-group">
+                        <label for="" class="control-label">Available </label>
+                         <input type="checkbox"  formControlName="available" >
+                    </div>
+                             
+                    <button type="submit" [disabled]="!productFormGroup.valid" class="btn btn-primary">Update </button>
+                              </form>
+                          
+         
+         </div>
+         </div>
+         </div>
+         </div>
+
+
+         
+         
+         
+         
+       
