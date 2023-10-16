@@ -39,9 +39,11 @@ console.log(this.order)
        this.payment=data
        
        alert("payment effectue avec success")
+       
        this.orderService.order.paid=true
        this.orderService.order=new Order()
          this.router.navigateByUrl("/order")
+         
       }
     })
   }

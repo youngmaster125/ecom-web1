@@ -14,7 +14,7 @@ import { CaddiesComponent } from './caddies/caddies.component';
 import { LoginComponent } from './login/login.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import { NgxPrintModule } from 'ngx-print';
+import { NgxPrintModule } from 'ngx-print';
 
 
 
@@ -33,7 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
   ],
   imports: [
-    BrowserModule,//NgxPrintModule,
+    BrowserModule,NgxPrintModule,
     AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule
   ],
   providers: [],

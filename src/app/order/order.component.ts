@@ -36,6 +36,8 @@ orderDetails!:any;
       {
         next:(data)=>{
           this.order=data
+          localStorage.removeItem("myCaddies")
+        //location.reload()
         },error:err=>{
           console.log(err)
         }

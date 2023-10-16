@@ -1,3 +1,64 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box-element">
+
+            <a  class="btn btn-outline-dark" routerLink="" >&#x2190; Continue Shopping</a>
+
+            <br>
+            <br>
+            <table class="table">
+                <tr>
+                    <th><h5>Items: <strong>{{caddyService.getTotalQuantity()}} </strong></h5></th>
+                    <th><h5>Total:<strong>{{caddyService.getTotal()}} </strong></h5></th>
+                    <th>
+                        <button  style="float:right; margin:5px;" [disabled]="caddyService.getTotal()<=0" (click)="onNewOder()" class="btn btn-success clickable">Checkout</button>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+
+        <br>
+        <div class="box-element">
+            <div class="cart-row">
+                <div style="flex:2"></div>
+                <div style="flex:2"><strong>Item</strong></div>
+                <div style="flex:1"><strong>Price</strong></div>
+                <div style="flex:1"><strong>Quantity</strong></div>
+                <div style="flex:1"><strong>Total</strong></div>
+            </div>
+    <div *ngIf="this.caddyService.getCurrentCaddy()" >
+            
+           <div *ngFor="let pi of  productItem"> 
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="{{this.productService.host+'/photoProduct/'+pi.id}}"></div>
+                <div style="flex:2"><p>{{pi.product.name}}</p></div>
+                <div style="flex:1"><p>{{pi.price}}</p></div>
+                <div style="flex:1">
+                    <p class="quantity">{{pi.quantity}}</p>
+                    <div class="quantity">
+                    <i data-product="" 
+                    data-action="add" class="bi bi-arrow-up chg-quantity clickable update-cart" (click)="onAddProductTocaddy(pi)"></i>
+                       <!--
+                        <img class="chg-quantity" src="{% static  'images/arrow-up.png' %}">
+                
+                        <img class="chg-quantity" src="{% static  'images/arrow-down.png' %}">
+                        !-->
+                         <i 
+                         data-action="remove"
+                         (click)="onDecreaseQuantity(pi)"
+                         class="bi bi-arrow-down clickable chg-quantity update-cart"></i>
+                    </div>
+                </div>
+                <div style="flex:1"><b>{{pi.quantity*pi.price}}</b></div>
+            </div>
+</div>
+        </div>
+    </div>
+</div>
+</div>
+<!----
+
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -43,3 +104,4 @@
     </div>
     
     </div>
+    --->

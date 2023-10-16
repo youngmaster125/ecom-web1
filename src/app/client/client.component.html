@@ -1,3 +1,108 @@
+
+     <div class="row" *ngIf="mode==0">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+				<form #f="ngForm" (ngSubmit)="onSaveClient(f.value)">
+					<div id="user-info">
+						<div class="form-field">
+                            <input type="text" required="" #nom="ngModel"   ngModel    name="name"  id="" class="form-control" placeholder="Name......"
+                           
+                            [ngClass]="{ 'is-invalid': nom.errors && (nom.dirty || nom.touched) }"
+                            [ngClass]="{ 'is-valid': nom.valid && (nom.dirty || nom.touched) }"
+                           
+                            
+                            >
+                            <small *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger ">
+                                nom required </small>
+						</div>
+						<div class="form-field">
+							<input type="email" required="" email="" #email="ngModel" name="email" id="" ngModel class="form-control" placeholder="email....."
+                            [ngClass]="{ 'is-invalid': email.errors && (email.dirty || email.touched) }"
+                            [ngClass]="{ 'is-valid': email.valid && (email.dirty || email.touched) }"
+                           
+                            >
+                            <small *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger ">
+                                email required </small>
+
+						</div>
+					</div>
+					
+					<div id="shipping-info">
+						<hr>
+						<p>Shipping Information:</p>
+						<hr>
+						<div class="form-field">
+							<input type="text" required=""  name="adresse" id="" #adresse="ngModel" ngModel class="form-control" placeholder="Adresse"
+                            [ngClass]="{ 'is-invalid': adresse.errors && (adresse.dirty || adresse.touched) }"
+                            [ngClass]="{ 'is-valid': adresse.valid && (adresse.dirty || adresse.touched) }"
+                           
+                            >
+                            <small *ngIf="adresse.invalid && (adresse.dirty || adresse.touched)" class="text-danger ">
+                                adresse required </small>
+						</div>
+						<div class="form-field">
+							<input type="tel" required="" name="phoneNumber" id="" #phone="ngModel" ngModel class="form-control" placeholder="Phone Number"
+                            [ngClass]="{ 'is-invalid': phone.errors && (phone.dirty || phone.touched) }"
+                            [ngClass]="{ 'is-valid': phone.valid && (phone.dirty || phone.touched) }"
+                           
+                            minlength="8" maxlength="8"
+                            >
+                            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                            class="alert">
+                        
+                          <small *ngIf="phone.errors?.['required'] && (phone.dirty || phone.touched)" class="text-danger">
+                            Phone is required.
+                          </small>
+                          <small *ngIf="phone.errors?.['minlength']" class="text-danger">
+                            Name must be at least 8 characters long.
+                          </small>
+                          <small *ngIf="phone.errors?.['maxlength']" class="text-danger">
+                            Max 8 characters long.
+                          </small>
+                          </div>
+						</div>
+						
+					</div>
+
+					<hr>
+					<button type="submit"  [disabled]="!f.valid"  class=" btn btn-success">Next</button>
+				</form>
+			</div>
+
+			<br>
+			<div class="box-element hidden" id="payment-info">
+				<small>Paypal Options</small>
+				<button id="make-payment"> make payment</button>
+			</div>
+			
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box-element">
+				<a  class="btn btn-outline-dark clickable " routerLink="/caddies">&#x2190; Back to Cart</a>
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+
+                <div *ngIf="this.caddyService.getCurrentCaddy()"> 
+				 <div *ngFor="let pi of  productItem">
+				    <div class="cart-row">
+					 <div style="flex:2"><img class="row-image" src="{{this.productService.host+'/photoProduct/'+pi.id}}"
+                        ></div>
+					 <div style="flex:2"><p>{{pi.product.name}} </p></div>
+					 <div style="flex:1"><p>{{pi.price}}</p></div>
+					 <div style="flex:1"><p>{{pi.quantity}}</p></div>
+				    </div>
+			    </div>
+            </div>
+            </div>
+				<h5>Items: {{this.caddyService.getTotalQuantity()}} </h5>
+				<h5>Total:  {{this.caddyService.getTotal()}}$   </h5>
+			</div>
+		</div>
+	
+
+<!-----------------------------------
 <div class="container">
     <div class="row">
         <div class="card"  *ngIf="mode==0">
@@ -25,6 +130,7 @@
     
             </div>
         </div>
+    -->
     <!-- csdvdffcxbcbccccccccccccccccccccca-->
     <div class="card"  *ngIf="mode==1">
         <div class="card-header">Recap de votre Commande</div>
@@ -86,8 +192,7 @@
         </div>
     </div>
     
-    </div>
-    </div>
+    
     
     
     

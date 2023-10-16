@@ -41,8 +41,20 @@ productItem.quantity+=product.quantity
   productItem.quantity=product.quantity
   productItem.product=product
   caddy?.items.set(product.id,productItem)
-this.saveCaddy()
 }
+
+this.saveCaddy()
+  }
+  public removeProductToCaddy(product:Product){
+    let caddy=this.caddies.get(this.currentCaddyName)
+    let productItem:ProductItem|undefined=caddy?.items.get(product.id)
+    if(productItem!.quantity>0){
+       productItem!.quantity-=product.quantity
+       if(productItem?.quantity!<=0){
+        this.deleteProductToCaddy(productItem!)
+       }
+    }
+    this.saveCaddy()
   }
   public deleteProductToCaddy(productItem:ProductItem){
     let caddy=this.caddies.get(this.currentCaddyName)
@@ -87,6 +99,16 @@ this.saveCaddy()
     }
     return total
     }
-
+    
+    getTotalQuantity(){
+      let total=0
+      let items:IterableIterator<ProductItem>|undefined=this.getCurrentCaddy()?.items.values()
+      for(let pi of items!){
+        total+=pi.quantity
+      }
+      return total
+      }
+      
+    
 
 }
