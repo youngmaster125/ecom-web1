@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CatalogueService } from './service/catalogue.service';
 import { Router } from '@angular/router';
 import { AuthentificationService } from './service/authentification.service';
@@ -9,7 +9,7 @@ import { CaddyService } from './service/caddy.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'ecom-web1';
   

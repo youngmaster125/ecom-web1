@@ -1,0 +1,136 @@
+
+<div class="container">
+    <div class="row" *ngIf="mode==0">
+        <div class="col-sm-6 offset-sm-3">
+    <h3>Customer Registration </h3>
+    <hr>
+    <form [formGroup]="userFormGroup"  (ngSubmit)="onSubmit()" class="shadow p-5">
+        <div class="form-group">
+            <label for="" class="control-label">Username</label>
+            <input type="text" class="form-control" formControlName="username"
+            [ngClass]="{ 'is-invalid': userFormGroup.controls['username'].errors
+             && (userFormGroup.controls['username'].dirty ||userFormGroup.controls['username'].touched)}"
+             [ngClass]="{ 'is-valid': userFormGroup.controls['username'].valid
+             && (userFormGroup.controls['username'].dirty ||userFormGroup.controls['username'].touched)}"
+            >
+            <small *ngIf="userFormGroup.controls['username'].errors 
+            && userFormGroup.controls['username'].touched" class="text-danger">
+        {{getErroMessage('username',userFormGroup.controls['username'].errors)}}
+        </small>
+        </div>
+
+        <div class="form-group">
+          <label for="" class="control-label">Email</label>
+          <input type="email" class="form-control" formControlName="email"
+          [ngClass]="{ 'is-invalid': userFormGroup.controls['email'].errors
+           && (userFormGroup.controls['email'].dirty ||userFormGroup.controls['email'].touched)}"
+           [ngClass]="{ 'is-valid': userFormGroup.controls['email'].valid
+           && (userFormGroup.controls['email'].dirty ||userFormGroup.controls['email'].touched)}"
+          
+           >
+          <small *ngIf="userFormGroup.controls['email'].errors 
+          && userFormGroup.controls['email'].touched" class="text-danger">
+      {{getErroMessage('email',userFormGroup.controls['email'].errors)}}
+      </small>
+  
+      </div>
+      
+      <div class="form-group" formGroupName="passwordGroup">
+        <label for=""  class="control-label">Password</label>
+        <input type="password" class="form-control"  formControlName="password"
+        [ngClass]="{ 'is-invalid':!userFormGroup.get('passwordGroup.password')?.valid &&
+          userFormGroup.get('passwordGroup.password')?.touched 
+                 }"
+         
+         [ngClass]="{ 'is-valid': userFormGroup.get('passwordGroup.password')?.valid
+         && userFormGroup.get('passwordGroup.password')?.touched }"
+         >
+         <small *ngIf="userFormGroup.get('passwordGroup.password')?.hasError('required')
+         && userFormGroup.get('passwordGroup.password')?.touched" class="text-danger">
+       required
+       </small> 
+       <small *ngIf="userFormGroup.get('passwordGroup.password')?.hasError('minlength')
+       && userFormGroup.get('passwordGroup.password')?.touched" class="text-danger">
+      min
+      
+     </small> 
+       
+    </div>
+
+    <div class="form-group" formGroupName="passwordGroup">
+      <label for=""  class="control-label">Confirm Password</label>
+      <input type="password" class="form-control"  formControlName="passwordconfirm"
+      [ngClass]="{ 'is-invalid':!userFormGroup.get('passwordGroup')?.valid &&
+     ( (userFormGroup.get('passwordGroup.passwordconfirm')?.touched ||
+        userFormGroup.get('passwordGroup.passwordconfirm')?.dirty 
+      
+      ) && !userFormGroup.get('passwordGroup.passwordconfirm')?.valid )
+        
+               }"
+       
+               [ngClass]="{ 'is-valid':userFormGroup.get('passwordGroup')?.valid &&
+               userFormGroup.get('passwordGroup.passwordconfirm')?.touched &&
+               userFormGroup.get('passwordGroup.passwordconfirm')?.valid
+                }"
+       >
+       <small *ngIf="userFormGroup.get('passwordGroup.passwordconfirm')?.hasError('required')
+       && userFormGroup.get('passwordGroup.passwordconfirm')?.touched" class="text-danger">
+     required
+     </small> 
+     <small *ngIf="userFormGroup.get('passwordGroup.passwordconfirm')?.hasError('minlength')
+     && userFormGroup.get('passwordGroup.passwordconfirm')?.touched" class="text-danger">
+    min
+   </small> 
+   <small *ngIf="userFormGroup.get('passwordGroup')?.hasError('match')
+" class="text-danger">
+  match password incorrect
+  {{getErroMessage('email',userFormGroup)}}
+ </small> 
+  </div>
+
+             <br>
+      <input type="submit" [disabled]="userFormGroup.invalid" value="Submit" class="btn btn-primary col-sm-6 offset-sm-3 " ><br>
+      <div >
+        <small class="text-center text-primary fw-bold clickable" >Existing user? 
+            <a routerLink="/login"  class="text-danger clickable">Login Now </a> </small>
+      </div>
+      <small *ngIf="errorMessage" class="text-danger
+                    col-sm-6 offset-sm-3 ">
+                       <b> {{errorMessage}} </b> </small>
+      
+    </form>
+
+ </div>
+ 
+ </div>
+
+ <div class="row" *ngIf="mode==1">
+  <div class="col-sm-6 offset-sm-3">
+    <div class="shadow p-5">
+    <p>Customer registration</p>
+    <h4>you have registered succesfully as a Customer</h4>
+    <b>Please check your email to verify</b>
+    <hr>
+  
+
+  </div>
+ </div>
+ </div>
+ 
+ 
+
+
+  <!----
+          
+      <small *ngIf="userFormGroup.controls['passwordconfirm'].{{getErroMessage('passwordconfirm',userFormGroup.controls['passwordconfirm'].errors)}}errors 
+      && userFormGroup.controls['passwordconfirm'].touched" class="text-danger">
+  
+  
+  </small>
+   
+      [ngClass]="{ 'is-invalid': userFormGroup.controls['passwordconfirm'].errors
+
+       && (userFormGroup.controls['passwordconfirm'].dirty ||userFormGroup.controls['passwordconfirm'].touched)}"
+       [ngClass]="{ 'is-valid': userFormGroup.controls['passwordconfirm'].valid
+       && (userFormGroup.controls['passwordconfirm'].dirty ||userFormGroup.controls['passwordconfirm'].touched)}"
+      -->

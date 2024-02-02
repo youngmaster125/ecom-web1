@@ -52,9 +52,9 @@
         <li class="nav-item dropdown "
         style="color: rosybrown; font-size: 30px; "
         *ngIf="this.auth.isAuthentificated else loginTemplate">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{{auth.userAuthentificated?.username}}</a>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{{auth.username}}</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Change Password</a></li>
+            <li><a class="dropdown-item" routerLink="/changePassword">Change Password</a></li>
             <li><a class="dropdown-item" (click)="Logout()" href="#">Logout</a></li>
           
           </ul>

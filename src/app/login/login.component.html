@@ -1,19 +1,56 @@
-<div class="col-md-6">
-    <div class="card center"  style="width: 18rem;">
-        <div class="card-header header-primary">Authentification</div>
-            <div class="card-body">
-                <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <h3>Login </h3>
+                <hr>
+                <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="shadow p-5">
                     <div class="form-group">
                         <label for="" class="control-label">Username</label>
-                         <input type="text" name="username" class="form-control" ngModel>
+                         <input type="text" name="username" required="" #username="ngModel" class="form-control" ngModel
+                         [ngClass]="{ 'is-invalid': username.errors && (username.dirty || username.touched)}"
+                         [ngClass]="{ 'is-valid': username.valid && (username.dirty || username.touched) }"
+                        
+                         >
+                         <small *ngIf="username.invalid && (username.dirty || username.touched)" class="text-danger ">
+                            username required </small>
                     </div>
                     <div class="form-group">
-                        <label for="" class="control-label">Username</label>
-                         <input type="password" name="password" class="form-control" ngModel>
+                        <label for="" class="control-label">Password</label>
+                         <input type="password" required=""  minlength="4" name="password" #password="ngModel" class="form-control" ngModel
+                         [ngClass]="{ 'is-invalid': password.errors && (password.dirty || password.touched)}"
+                         [ngClass]="{ 'is-valid': password.valid && (password.dirty || password.touched) }"
+                        
+                         >
+                         <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                         class="alert">
+                     
+                       <small *ngIf="password.errors?.['required'] && (password.dirty || password.touched)" class="text-danger">
+                         Password is required.
+                       </small>
+                       <small *ngIf="password.errors?.['minlength']" class="text-danger">
+                         Password must be at least 4 characters long.
+                       </small>
+                       <small *ngIf="password.errors?.['maxlength']" class="text-danger">
+                         Max 8 characters long.
+                       </small>
+                       </div>
                     </div>
-                    <button class="btn btn-primary"  type="submit">Login</button>
+                    <br>
+                    <button class="btn btn-primary col-sm-6 offset-sm-3"  [disabled]="!f.valid"  type="submit">Login</button>
+                    <div >
+                        <small class="text-center text-primary fw-bold clickable" > 
+                            <a (click)="forgetPassword()"  class=" btn-danger clickable">Forgot password </a> </small>
+                      </div><br>
+                      <div >
+                        <small class="text-center text-primary fw-bold clickable" >New user
+                            <a routerLink="/newUser" class="text-danger clickable">Create an Account </a> </small>
+                      </div>
+                    <small *ngIf="message" class="text-danger
+                    col-sm-6 offset-sm-3 ">
+                        {{message}} </small>
                 </form>
             </div>
         </div>
     </div>
+
     

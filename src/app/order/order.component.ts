@@ -30,12 +30,14 @@ orderDetails!:any;
 
  
   orders(){
-    let username=this.auth.userAuthentificated?.username!
+    let username=this.auth.username
+    console.log(username)
     console.log(username)
     this.orderService.myOrders(username).subscribe (
       {
         next:(data)=>{
           this.order=data
+          console.log(this.order)
           localStorage.removeItem("myCaddies")
         //location.reload()
         },error:err=>{

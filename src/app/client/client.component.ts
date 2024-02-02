@@ -42,7 +42,7 @@ mode: number=0;
   console.log(this.productItem)
   }
   onSaveClient(client: Client) {
-    client.username=this.authServie.userAuthentificated?.username!
+    client.username=this.authServie.username
     console.log(client.username)
      this.orderService.setClient(client)
      this.caddyService.setClient(client)
